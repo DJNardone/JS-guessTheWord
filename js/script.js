@@ -14,9 +14,9 @@ const span = document.querySelector(".remaining span");
 const message = document.querySelector(".message");
 // "play again" button
 const playAgain = document.querySelector(".play-again");
-
 // test word
 const word = "farming";
+// array to store guessed letters
 const guessedLetters = [];
 
 // hides the word/letters in play with dots.
@@ -51,17 +51,20 @@ guessButton.addEventListener("click", function(e) {
 const validGuess = function (input) {
     const acceptedLetter = /[a-zA-Z]/;
     if (input.length === 0) {
+        // no guess entered
         message.innerText = "Please enter a letter from A-Z.";
     }   else if (input.length > 1) {
+        // double letter guess entered
         message.innerText = "Enter one letter at a time please.";
     }   else if (!input.match(acceptedLetter)) {
+        // non-alphabetical guess entered
         message.innerText = "Please enter a letter from A-Z.";
     }   else {
         return input;
     }
 };
 
-// prevent duplicate letter guesses
+// check/prevent duplicate letter guesses
 const makeGuess = function (inputValue) {
     inputValue = inputValue.toUpperCase();
     if (guessedLetters.includes(inputValue)) {
