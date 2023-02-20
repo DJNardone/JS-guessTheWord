@@ -16,13 +16,14 @@ const message = document.querySelector(".message");
 const playAgain = document.querySelector(".play-again");
 
 // test word
-const word = "magnolia";
+const word = "farming";
+const guessedLetters = [];
 
 // hides the word/letters in play with dots.
 const hideLetter = function (word) {
     const letterArray = [];
     for (let letter of word) {
-        console.log(letter);
+        //console.log(letter);
         letterArray.push("●")
     }
     wordPlay.innerText = letterArray.join("");
@@ -30,10 +31,45 @@ const hideLetter = function (word) {
 
 hideLetter(word);
 
-// event input for letter guesses
+// event handler - letter input box
 guessButton.addEventListener("click", function(e) {
     e.preventDefault();
+    message.innerText = "";
     const inputValue = inputLetter.value;
-    console.log(inputValue);
+    //console.log(inputValue);
+
+    // check that input is a single letter
+    const goodInput = validGuess(inputValue);
+        if (goodInput) {
+            makeGuess(inputValue);
+        }
+    //console.log(goodInput);
     inputLetter.value = "";
 });
+
+// validate player's input
+const validGuess = function (input) {
+    const acceptedLetter = /[a-zA-Z]/;
+    if (input.length === 0) {
+        message.innerText = "Please enter a letter from A-Z.";
+    }   else if (input.length > 1) {
+        message.innerText = "Enter one letter at a time please.";
+    }   else if (!input.match(acceptedLetter)) {
+        message.innerText = "Please enter a letter from A-Z.";
+    }   else {
+        return input;
+    }
+};
+
+// prevent duplicate letter guesses
+const makeGuess = function (inputValue) {
+    inputValue = inputValue.toUpperCase();
+    if (guessedLetters.includes(inputValue)) {
+        message.innerText = "You already guessed that letter, please try again.";
+    }   else {
+        guessedLetters.push(inputValue);
+        console.log(guessedLetters);
+    }
+};
+
+
