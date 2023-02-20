@@ -18,6 +18,7 @@ const playAgain = document.querySelector(".play-again");
 // test word
 const word = "magnolia";
 
+// hides the word/letters in play with dots.
 const hideLetter = function (word) {
     const letterArray = [];
     for (let letter of word) {
@@ -29,6 +30,7 @@ const hideLetter = function (word) {
 
 hideLetter(word);
 
+// event input for letter guesses
 guessButton.addEventListener("click", function(e) {
     e.preventDefault();
     const inputValue = inputLetter.value;
