@@ -16,7 +16,7 @@ const message = document.querySelector(".message");
 const playAgain = document.querySelector(".play-again");
 // test word
 let word = "magnolia";
-//
+// array
 let guessedLetters = [];
 // max number of guesses
 let remainingGuesses = 8;
